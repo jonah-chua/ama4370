@@ -1,0 +1,2402 @@
+[
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "empty_data_for_fold {'train_start': '2023-11-01', 'train_end': '2024-08-31', 'test_start': '2024-08-01', 'test_end': '2024-10-31'}"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  },
+  {
+    "error": "train_error: detect_order_blocks() got an unexpected keyword argument 'ob_search_window'"
+  }
+]

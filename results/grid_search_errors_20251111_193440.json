@@ -1,0 +1,42 @@
+[
+  {
+    "coin": "ETHUSDT",
+    "timeframe": "1m",
+    "futures": true,
+    "combo": {
+      "swing_length": 100,
+      "stop_loss_multiplier": 1.2,
+      "take_profit_multiplier": 2,
+      "min_strength_ratio": 0.7,
+      "trailing_stop_activation": 3.0,
+      "trailing_stop_percent": 3.0,
+      "violation_type": "Wick",
+      "ob_search_window_frac": 1e-06,
+      "break_atr_mult": 0.1,
+      "ob_min_sl_atr_mult": 0.5,
+      "ob_min_sl_pct": 0.001,
+      "risk_per_trade_percent": 5
+    },
+    "error": "read_parquet_error: [Errno 2] No such file or directory: 'data\\\\ETHUSDT_1m_2023-11-01_2025-10-31_futures.parquet'"
+  },
+  {
+    "coin": "ETHUSDT",
+    "timeframe": "1m",
+    "futures": true,
+    "combo": {
+      "swing_length": 20,
+      "stop_loss_multiplier": 0.7,
+      "take_profit_multiplier": 6,
+      "min_strength_ratio": 0.5,
+      "trailing_stop_activation": 3.0,
+      "trailing_stop_percent": 2.5,
+      "violation_type": "Close",
+      "ob_search_window_frac": 0.25,
+      "break_atr_mult": 0.1,
+      "ob_min_sl_atr_mult": 0.5,
+      "ob_min_sl_pct": 0.0005,
+      "risk_per_trade_percent": 5
+    },
+    "error": "read_parquet_error: [Errno 2] No such file or directory: 'data\\\\ETHUSDT_1m_2023-11-01_2025-10-31_futures.parquet'"
+  }
+]
