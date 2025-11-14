@@ -1152,14 +1152,9 @@ def detect_order_blocks(df: pd.DataFrame,
                                 atr_half_floor = atr_val_here * 0.5  # half-ATR floor
                                 risk_per_unit = max(sl_distance, min_risk_per_unit, atr_half_floor)
                                 position_size = capital_at_risk / (risk_per_unit if risk_per_unit > 0 else 1.0)
-
-                                # Apply maximum position size constraint
                                 max_units = max_position_size_usd / entry_price if entry_price > 0 else position_size
                                 position_size = min(position_size, max_units)
-
-                                # Recalculate actual capital at risk based on constrained position size
                                 actual_capital_at_risk = position_size * risk_per_unit
-
                                 position = Position(
                                     entry_idx=sig_idx,
                                     entry_time=df['timestamp'].iat[sig_idx],
@@ -1410,7 +1405,7 @@ def plot_with_obs(df: pd.DataFrame, obs: List[OrderBlock], signals: List[Signal]
     sell_prices = [s.price for s in signals if s.kind == 'sell']
 
     if buy_times:
-        ax.scatter(pd.to_datetime(buy_times, unit='ms'), buy_prices, marker='^', color='green', s=80, zorder=10, label='buy')
+        ax.scatter(pd.to_datetime(buy_times, unit='ms'), buy_prices, marker='^', color='green, s=80, zorder=10, label='buy')
     if sell_times:
         ax.scatter(pd.to_datetime(sell_times, unit='ms'), sell_prices, marker='v', color='red', s=80, zorder=10, label='sell')
 
@@ -1951,6 +1946,14 @@ entry_diff_short_pct = 0.03
 # Placeholder for data, it's commented out intentionally to prevent repeated fetching
 data = None  #data is already in cache so this is intentionally
 
+import sys, os
+from pathlib import Path
+
+# Ensure project root (script folder) is on sys.path so local modules can be imported.
+repo_root = Path(__file__).resolve().parent
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
+
 # =========================
 # Example / entry point
 # =========================
@@ -1960,11 +1963,45 @@ if __name__ == "__main__":
     # without requiring `requests` to be installed at import-time.
     if data is None:
         try:
-            from binance_collector import BinanceDataCollector
-            
+            # first try normal package import
+            from binance.binance_collector import BinanceDataCollector
         except Exception as e:
-            print("BinanceDataCollector not available:", e)
+            print("BinanceDataCollector not available via package import:", e)
             BinanceDataCollector = None
+            # attempt to find binance_collector.py in sensible locations and import it by path
+            try:
+                from importlib import util
+                search_bases = [
+                    Path(__file__).resolve().parent,
+                    Path.cwd(),
+                    Path.home()
+                ]
+                found = None
+                for base in search_bases:
+                    try:
+                        for p in base.rglob("binance_collector.py"):
+                            found = p
+                            break
+                    except Exception:
+                        continue
+                    if found:
+                        break
+                if found:
+                    # add parent directory so any internal package imports work
+                    parent_dir = str(found.parent)
+                    if parent_dir not in sys.path:
+                        sys.path.insert(0, parent_dir)
+                    spec = util.spec_from_file_location("binance_collector", str(found))
+                    mod = util.module_from_spec(spec)
+                    spec.loader.exec_module(mod)
+                    BinanceDataCollector = getattr(mod, "BinanceDataCollector", None)
+                    if BinanceDataCollector is None:
+                        print("Found file but BinanceDataCollector class not in module:", found)
+                else:
+                    print("Could not locate binance_collector.py under search paths.")
+            except Exception as e2:
+                print("Failed to import binanceDataCollector from file:", e2)
+                BinanceDataCollector = None
 
         if BinanceDataCollector is None:
             #data = None

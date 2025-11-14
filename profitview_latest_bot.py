@@ -60,6 +60,7 @@ class TradingPosition:
     lowest_price: Optional[float] = None
     trailing_active: bool = False
     trailing_activation_time: Optional[int] = None
+    trailing_activation_idx: Optional[int] = None  # Candle index when trailing was activated
     
     order_id: Optional[str] = None  # ProfitView order ID
     
@@ -703,17 +704,22 @@ class Trading(Link):
         
         # Main trading logic (only if running)
         if self.running:
-            self.update_candles()
+            # Extract trade size for volume accumulation
+            trade_size = data.get('size', 0.0)
+            self.update_candles(trade_size)
             self.check_exit_conditions()
     
     
     # =========================
     # Candle Management
     # =========================
-    def update_candles(self):
+    def update_candles(self, trade_size: float = 0.0):
         """
         Update candle data when new trade occurs.
         Aggregates trades into candles based on CANDLE_LEVEL_MS.
+        
+        Args:
+            trade_size: Volume from the trade_update event to accumulate in the current candle
         """
         if not self.candles:
             return
@@ -726,27 +732,27 @@ class Trading(Link):
         
         if candle_start > last_candle.time:
             # New candle period - finalize the last one and process for OBs
-            logger.info(f"New candle: {last_candle.time} | O:{last_candle.open:.2f} H:{last_candle.high:.2f} L:{last_candle.low:.2f} C:{last_candle.close:.2f}")
+            logger.info(f"New candle: {last_candle.time} | O:{last_candle.open:.2f} H:{last_candle.high:.2f} L:{last_candle.low:.2f} C:{last_candle.close:.2f} V:{last_candle.volume:.4f}")
             
             # Process the completed candle for order blocks
             self.process_new_candle()
             
-            # Start new candle with current price
+            # Start new candle with current price and initial trade volume
             new_candle = Candle(
                 time=candle_start,
                 open=self.current_price,
                 high=self.current_price,
                 low=self.current_price,
                 close=self.current_price,
-                volume=0.0
+                volume=trade_size
             )
             self.candles.append(new_candle)
         else:
-            # Update current candle
+            # Update current candle with price and accumulate volume from this trade
             last_candle.high = max(last_candle.high, self.current_price)
             last_candle.low = min(last_candle.low, self.current_price)
             last_candle.close = self.current_price
-            # Note: We don't have individual trade volume in trade_update, so volume tracking is approximate
+            last_candle.volume += trade_size
     
     
     # =========================
@@ -776,7 +782,7 @@ class Trading(Link):
         current_idx = len(candle_list) - 1
         
         # Check for pivot confirmation at swing_length bars back
-        pivot_idx = current_idx - self.SWING_LENGTH
+        pivot_idx = current_idx
         self.check_pivot_high(candle_list, pivot_idx)
         self.check_pivot_low(candle_list, pivot_idx)
         
@@ -791,6 +797,7 @@ class Trading(Link):
         """
         Check if candle at center_idx is a pivot high.
         Pivot high: center candle high is highest within swing_length on both sides.
+        Per Latest_test.py: pivot is stored at confirmation index (center + SWING_LENGTH).
         """
         if center_idx < self.SWING_LENGTH or center_idx >= len(candles) - self.SWING_LENGTH:
             return
@@ -805,15 +812,19 @@ class Trading(Link):
                 break
         
         if is_pivot:
-            self.last_pivot_high = (center_idx, center_high, candles[center_idx].time)
-            self.pivot_highs.append(self.last_pivot_high)
-            logger.info(f"Pivot High detected at idx {center_idx}: {center_high:.2f}")
+            # Store pivot at confirmation index (matches Latest_test.py behavior)
+            pivot_idx_confirm = center_idx + self.SWING_LENGTH
+            if pivot_idx_confirm < len(candles):
+                self.last_pivot_high = (pivot_idx_confirm, center_high, candles[pivot_idx_confirm].time)
+                self.pivot_highs.append(self.last_pivot_high)
+                logger.info(f"Pivot High detected at center {center_idx}, confirmed at {pivot_idx_confirm}: {center_high:.2f}")
     
     
     def check_pivot_low(self, candles: List[Candle], center_idx: int):
         """
         Check if candle at center_idx is a pivot low.
         Pivot low: center candle low is lowest within swing_length on both sides.
+        Per Latest_test.py: pivot is stored at confirmation index (center + SWING_LENGTH).
         """
         if center_idx < self.SWING_LENGTH or center_idx >= len(candles) - self.SWING_LENGTH:
             return
@@ -828,9 +839,12 @@ class Trading(Link):
                 break
         
         if is_pivot:
-            self.last_pivot_low = (center_idx, center_low, candles[center_idx].time)
-            self.pivot_lows.append(self.last_pivot_low)
-            logger.info(f"Pivot Low detected at idx {center_idx}: {center_low:.2f}")
+            # Store pivot at confirmation index (matches Latest_test.py behavior)
+            pivot_idx_confirm = center_idx + self.SWING_LENGTH
+            if pivot_idx_confirm < len(candles):
+                self.last_pivot_low = (pivot_idx_confirm, center_low, candles[pivot_idx_confirm].time)
+                self.pivot_lows.append(self.last_pivot_low)
+                logger.info(f"Pivot Low detected at center {center_idx}, confirmed at {pivot_idx_confirm}: {center_low:.2f}")
     
     
     def check_breakouts(self, candles: List[Candle], current_idx: int):
@@ -901,18 +915,27 @@ class Trading(Link):
         
         ob_candle = candles[best_candle_idx]
         
-        # Calculate strengths
-        bullish_str, bearish_str = self.calculate_strengths(candles, best_candle_idx, self.ob_search_window)
+        # Calculate strengths (use full SWING_LENGTH to match Latest_test behavior)
+        bullish_str, bearish_str = self.calculate_strengths(candles, best_candle_idx, self.SWING_LENGTH)
         total_vol = bullish_str + bearish_str
         
+        # Use MIN_TOTAL_VOLUME as a floor for ratio calculation, not as a gate
+        # Always create OB even if volume is low (per Latest_test.py behavior)
         if total_vol < self.MIN_TOTAL_VOLUME:
-            return
+            total_vol = self.MIN_TOTAL_VOLUME
         
-        # Create OB
+        # OB geometry: use window around selected candle (matches Latest_test.py)
+        half_window = self.ob_search_window // 2
+        ws = max(0, best_candle_idx - half_window)
+        we = min(len(candles) - 1, best_candle_idx + half_window)
+        ob_top = max(c.high for c in candles[ws:we+1])
+        ob_btm = min(c.low for c in candles[ws:we+1])
+        
+        # Create OB (always created, regardless of volume)
         ob = OrderBlock(
             kind="bearish",
-            top=ob_candle.high,
-            btm=ob_candle.low,
+            top=ob_top,
+            btm=ob_btm,
             start_time=ob_candle.time,
             create_time=candles[breakout_idx].time,
             bullish_str=bullish_str,
@@ -930,7 +953,7 @@ class Trading(Link):
             # Defensive: if pivot_idx isn't available for any reason, continue
             pass
         
-        # Generate signal
+        # Generate signal (may be skipped if strength ratio too low)
         self.generate_signal("short", candles[breakout_idx], ob)
     
     
@@ -967,18 +990,27 @@ class Trading(Link):
         
         ob_candle = candles[best_candle_idx]
         
-        # Calculate strengths
-        bullish_str, bearish_str = self.calculate_strengths(candles, best_candle_idx, self.ob_search_window)
+        # Calculate strengths (use full SWING_LENGTH to match Latest_test behavior)
+        bullish_str, bearish_str = self.calculate_strengths(candles, best_candle_idx, self.SWING_LENGTH)
         total_vol = bullish_str + bearish_str
         
+        # Use MIN_TOTAL_VOLUME as a floor for ratio calculation, not as a gate
+        # Always create OB even if volume is low (per Latest_test.py behavior)
         if total_vol < self.MIN_TOTAL_VOLUME:
-            return
+            total_vol = self.MIN_TOTAL_VOLUME
         
-        # Create OB
+        # OB geometry: use window around selected candle (matches Latest_test.py)
+        half_window = self.ob_search_window // 2
+        ws = max(0, best_candle_idx - half_window)
+        we = min(len(candles) - 1, best_candle_idx + half_window)
+        ob_top = max(c.high for c in candles[ws:we+1])
+        ob_btm = min(c.low for c in candles[ws:we+1])
+        
+        # Create OB (always created, regardless of volume)
         ob = OrderBlock(
             kind="bullish",
-            top=ob_candle.high,
-            btm=ob_candle.low,
+            top=ob_top,
+            btm=ob_btm,
             start_time=ob_candle.time,
             create_time=candles[breakout_idx].time,
             bullish_str=bullish_str,
@@ -995,7 +1027,7 @@ class Trading(Link):
         except Exception:
             pass
 
-        # Generate signal
+        # Generate signal (may be skipped if strength ratio too low)
         self.generate_signal("long", candles[breakout_idx], ob)
     
     
@@ -1085,17 +1117,21 @@ class Trading(Link):
                 ob.violated_time = last_candle.time
                 logger.info(f"{ob.kind.capitalize()} OB violated: {ob.btm:.2f}-{ob.top:.2f}")
             else:
-                # Reinforcement: if the completed candle touches/enters the OB but does NOT violate it,
-                # treat it as forward reinforcement and add its volume to the OB strength.
-                # This increases ob.bullish_str or ob.bearish_str depending on candle polarity.
+                # Reinforcement: CONSERVATIVE body-only test (matching Latest_test.py)
+                # Only reinforce if the candle BODY (not wicks) lies fully inside the OB.
+                # This avoids counting touching/violating wicks and prevents reinforcement
+                # on bars that actually violate the OB.
                 try:
-                    touched = (last_candle.high >= ob.btm) and (last_candle.low <= ob.top)
-                    if ob.active and touched:
-                        # Skip reinforcement if the candle actually violated the OB (handled above)
+                    body_low = min(last_candle.open, last_candle.close)
+                    body_high = max(last_candle.open, last_candle.close)
+                    body_inside = (body_low >= ob.btm) and (body_high <= ob.top)
+                    
+                    if ob.active and body_inside and last_candle.volume > 0:
+                        # Classify by candle body direction
                         if last_candle.close >= last_candle.open:
-                            ob.bullish_str += float(last_candle.volume or 0.0)
+                            ob.bullish_str += float(last_candle.volume)
                         else:
-                            ob.bearish_str += float(last_candle.volume or 0.0)
+                            ob.bearish_str += float(last_candle.volume)
                         ob.vol = ob.bullish_str + ob.bearish_str
                         logger.debug(f"Reinforcement added {last_candle.volume} vol to OB ({ob.kind}) at {last_candle.time}: bull={ob.bullish_str:.4f} bear={ob.bearish_str:.4f}")
                 except Exception:
@@ -1116,10 +1152,13 @@ class Trading(Link):
             logger.warning(f"⚠️ Skipping signal: Max loss limit reached (Cumulative PnL: ${self.cumulative_pnl:.2f})")
             return
         
-        # Check strength ratio
-        total_vol = ob.bullish_str + ob.bearish_str
-        if total_vol < self.MIN_TOTAL_VOLUME:
-            return
+        # Check strength ratio: use MIN_TOTAL_VOLUME as a floor for denominator
+        # Prefer OB's stored total vol (created with MIN_TOTAL_VOLUME floor) as denominator.
+        # Fall back to raw sum if ob.vol missing, then enforce floor — do NOT return early.
+        total_vol = getattr(ob, 'vol', None)
+        if total_vol is None or total_vol <= 0:
+            total_vol = ob.bullish_str + ob.bearish_str
+        total_vol = max(total_vol, self.MIN_TOTAL_VOLUME)
         
         if signal_type == "long":
             ratio = ob.bullish_str / total_vol
@@ -1141,11 +1180,20 @@ class Trading(Link):
         # Calculate EMA for entry filter
         ema = self.calculate_ema(len(self.candles) - 1)
         
-        # Entry price determination
+        # Entry price determination: prefer live quote data for immediate execution
+        # ProfitView provides real-time bid/ask via quote_update callbacks
         if self.ENTRY_PRICE_MODE.lower() == "close":
-            entry_price = candle.close
+            # Use candle close, but prefer live quote midpoint if available
+            if self.current_bid is not None and self.current_ask is not None:
+                entry_price = (self.current_bid + self.current_ask) / 2
+            else:
+                entry_price = candle.close
         else:  # "worst"
-            entry_price = candle.high if signal_type == "long" else candle.low
+            # Use worst case: ask for longs (more expensive), bid for shorts (less favorable)
+            if signal_type == "long":
+                entry_price = self.current_ask if self.current_ask is not None else candle.high
+            else:
+                entry_price = self.current_bid if self.current_bid is not None else candle.low
         
         # EMA filter
         if signal_type == "long":
@@ -1432,6 +1480,7 @@ class Trading(Link):
                         if profit >= activation_threshold:
                             position.trailing_active = True
                             position.trailing_activation_time = current_time
+                            position.trailing_activation_idx = self._get_candle_index_for_time(current_time)
                             logger.info(f"Trailing stop activated for long position @ {self.current_price:.2f}")
                 
                 else:  # short
@@ -1443,15 +1492,16 @@ class Trading(Link):
                         if profit >= activation_threshold:
                             position.trailing_active = True
                             position.trailing_activation_time = current_time
+                            position.trailing_activation_idx = self._get_candle_index_for_time(current_time)
                             logger.info(f"Trailing stop activated for short position @ {self.current_price:.2f}")
             
             # Check trailing stop exit
             if position.trailing_active:
-                # Check buffer period
-                time_since_activation = current_time - position.trailing_activation_time
-                buffer_ms = self.TRAILING_STOP_BUFFER_CANDLES * self.CANDLE_LEVEL_MS
+                # Use candle count for buffer (matches Latest_test.py behavior)
+                current_candle_idx = self._get_candle_index_for_time(current_time)
+                candles_since_activation = current_candle_idx - position.trailing_activation_idx if position.trailing_activation_idx is not None else 999
                 
-                if time_since_activation >= buffer_ms:
+                if candles_since_activation >= self.TRAILING_STOP_BUFFER_CANDLES:
                     if position.position_type == "long":
                         # Trail from highest price (with None check)
                         if position.highest_price is not None:
@@ -1699,6 +1749,8 @@ class Trading(Link):
                 if key == "max_loss_limit" and self.max_loss_reached:
                     logger.info("Max loss limit updated - resetting max_loss_reached flag")
                     self.max_loss_reached = False
+            
+           
             
             except (ValueError, TypeError) as e:
                 errors.append(f"{key}: invalid value type - {e}")
