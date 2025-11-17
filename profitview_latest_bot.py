@@ -61,6 +61,9 @@ class TradingPosition:
     trailing_active: bool = False
     trailing_activation_time: Optional[int] = None
     trailing_activation_idx: Optional[int] = None  # Candle index when trailing was activated
+    last_trailing_update_price: Optional[float] = None  # Last price where trailing was updated
+    
+    holding_counter: int = 0  # Number of candles held without reinforcement
     
     order_id: Optional[str] = None  # ProfitView order ID
     
@@ -136,6 +139,7 @@ class Trading(Link):
     TRAILING_STOP_PERCENT = 1.0  # Trail by this % from peak
     TRAILING_STOP_BUFFER_CANDLES = 10  # Wait this many candles after activation
     TRAILING_STOP_UPDATE_THRESHOLD = 0.4  # Update trail if price moves this %
+    TRAILING_ATR_MULT = 1.25  # ATR multiplier for trailing stop floor
     
     # Holding period management
     HOLDING_PERIOD_BARS = 480  # Close position after this many candles (0 = disabled)
@@ -231,6 +235,8 @@ class Trading(Link):
         # Fee Tracking
         # ==================
         self.total_fees_paid = 0.0
+        self.fee_baseline = 0.0  # Baseline from fetch_positions at startup
+        self.last_known_fees = 0.0  # Most recent fee snapshot from fetch_positions
         
         # ==================
         # PnL & Loss Limit Tracking
@@ -267,11 +273,39 @@ class Trading(Link):
         logger.info(f"Candle Level: {self.CANDLE_LEVEL} | Holding Period: {self.HOLDING_PERIOD_BARS} bars")
         logger.info(f"⏳ Waiting for market data... Ensure {self.SYMBOL} is subscribed in ProfitView!")
         logger.info(f"💡 Note: Bot needs LIVE trade updates to function. Historical data loaded successfully.")
+        
+        # Initialize fee baseline (best effort)
+        try:
+            self._initialize_fee_baseline()
+        except Exception as e:
+            logger.warning(f"Failed to initialize fee baseline: {e}")
     
     
     # =========================
     # Account & Initialization
     # =========================
+    def _initialize_fee_baseline(self):
+        """Fetch initial fee baseline from fetch_positions for delta tracking."""
+        try:
+            resp = self.fetch_positions(self.VENUE)
+            if resp and not resp.get('error'):
+                positions = resp.get('data', [])
+                for pos in positions:
+                    if pos.get('sym') == self.SYMBOL:
+                        fees = float(pos.get('fees', 0.0))
+                        self.fee_baseline = fees
+                        self.last_known_fees = fees
+                        logger.info(f"Fee baseline initialized: {fees:.4f} USDT")
+                        return
+                # No position for this symbol yet
+                self.fee_baseline = 0.0
+                self.last_known_fees = 0.0
+                logger.info("Fee baseline: 0.0 (no existing position)")
+        except Exception as e:
+            logger.warning(f"Failed to initialize fee baseline: {e}")
+            self.fee_baseline = 0.0
+            self.last_known_fees = 0.0
+    
     def fetch_account_info(self):
         """
         Fetch account balance and fee info from exchange.
@@ -515,12 +549,28 @@ class Trading(Link):
         
         logger.info(f"Order Update: {side} {data.get('order_size')} @ {data.get('order_price')} | Remain: {remain_size}")
         
+        # Try to extract actual fill price from order_update
+        if order_id and order_id in self.pending_orders:
+            position = self.pending_orders[order_id]
+            # Populate actual_entry_price if available and not set
+            if position.actual_entry_price is None:
+                fill_px = data.get('fill_price') or data.get('order_price')
+                if fill_px:
+                    try:
+                        position.actual_entry_price = float(fill_px)
+                        position.entry_filled_size = position.position_size
+                        logger.info(f"Set actual_entry_price from order_update: {position.actual_entry_price:.2f}")
+                    except (ValueError, TypeError):
+                        pass
+        
         # Check if order is fully filled
         if remain_size == 0 and order_id in self.pending_orders:
             position = self.pending_orders[order_id]
             logger.info(f"✓ Order filled: {position.position_type} position opened")
             self.open_positions.append(position)
             del self.pending_orders[order_id]
+            # Update fee delta after position opened
+            self._update_fee_delta()
     
     
     def fill_update(self, src: str, sym: str, data: dict):
@@ -597,14 +647,10 @@ class Trading(Link):
                     )
                     position.entry_filled_size = total_size
                 
-                position.entry_fees_paid += fee_amount
                 logger.info(f"Entry Fill: {side} {fill_size_float:.4f} @ {fill_price_float:.2f} | "
-                          f"Fee: {fee_amount:.4f} | Avg Entry: {position.actual_entry_price:.2f} | "
-                          f"Total Entry Fees: {position.entry_fees_paid:.4f}")
+                          f"Avg Entry: {position.actual_entry_price:.2f}")
             else:
-                # Just track fees even if price/size missing
-                position.entry_fees_paid += fee_amount
-                logger.warning(f"Entry Fill missing price/size data - only tracking fee: {fee_amount:.4f}")
+                logger.warning(f"Entry Fill missing price/size data")
         
         # Exit fills: check if any open position is currently closing
         elif fill_price_float and fill_size_float:
@@ -623,18 +669,16 @@ class Trading(Link):
                         )
                         position.exit_filled_size = total_size
                     
-                    position.exit_fees_paid += fee_amount
                     logger.info(f"Exit Fill: {side} {fill_size_float:.4f} @ {fill_price_float:.2f} | "
-                              f"Fee: {fee_amount:.4f} | Avg Exit: {position.actual_exit_price:.2f} | "
-                              f"Total Exit Fees: {position.exit_fees_paid:.4f}")
+                              f"Avg Exit: {position.actual_exit_price:.2f}")
                     break
         
         # Fallback logging if we couldn't match to a position
         if not order_id or order_id not in self.pending_orders:
             if fill_price_float and fill_size_float:
-                logger.info(f"Fill (unmatched): {side} {fill_size_float:.4f} @ {fill_price_float:.2f} | Fee: {fee_amount:.4f}")
+                logger.info(f"Fill (unmatched): {side} {fill_size_float:.4f} @ {fill_price_float:.2f}")
             else:
-                logger.info(f"Fill (unmatched): {side} | Fee: {fee_amount:.4f}")
+                logger.info(f"Fill (unmatched): {side}")
     
     
     def position_update(self, src: str, sym: str, data: dict):
@@ -702,6 +746,10 @@ class Trading(Link):
             if not self.initialized:
                 return  # Still not ready
         
+        # Reconcile pending orders (check if any were filled without callback)
+        if self.pending_orders:
+            self._reconcile_pending_orders()
+        
         # Main trading logic (only if running)
         if self.running:
             # Extract trade size for volume accumulation
@@ -709,6 +757,55 @@ class Trading(Link):
             self.update_candles(trade_size)
             self.check_exit_conditions()
     
+    
+    def _update_fee_delta(self):
+        """Update fee delta from fetch_positions and attribute to recent position."""
+        try:
+            resp = self.fetch_positions(self.VENUE)
+            if resp and not resp.get('error'):
+                positions = resp.get('data', [])
+                for pos in positions:
+                    if pos.get('sym') == self.SYMBOL:
+                        current_fees = float(pos.get('fees', 0.0))
+                        fee_delta = current_fees - self.last_known_fees
+                        
+                        if fee_delta > 1e-6:  # Meaningful delta
+                            # Attribute to most recent open position (best effort)
+                            if self.open_positions:
+                                recent_pos = self.open_positions[-1]
+                                recent_pos.entry_fees_paid += fee_delta
+                                logger.info(f"Fee delta attributed: +{fee_delta:.4f} to position (total: {recent_pos.entry_fees_paid:.4f})")
+                            
+                            self.total_fees_paid += fee_delta
+                            self.stats['total_fees'] += fee_delta
+                            self.last_known_fees = current_fees
+                        return
+        except Exception as e:
+            logger.warning(f"Failed to update fee delta: {e}")
+    
+    def _reconcile_pending_orders(self):
+        """Check if pending orders have been filled (reconciliation if callbacks missed)."""
+        if not self.pending_orders:
+            return
+        
+        try:
+            resp = self.fetch_open_orders(self.VENUE)
+            if resp and not resp.get('error'):
+                open_order_ids = {o.get('order_id') for o in resp.get('data', [])}
+                
+                # Check if any pending order is no longer open (was filled)
+                filled_orders = []
+                for order_id, position in list(self.pending_orders.items()):
+                    if order_id not in open_order_ids:
+                        filled_orders.append((order_id, position))
+                
+                for order_id, position in filled_orders:
+                    logger.info(f"Reconciliation: order {order_id} was filled (moved to open)")
+                    self.open_positions.append(position)
+                    del self.pending_orders[order_id]
+                    self._update_fee_delta()
+        except Exception as e:
+            logger.warning(f"Failed to reconcile pending orders: {e}")
     
     # =========================
     # Candle Management
@@ -777,6 +874,10 @@ class Trading(Link):
         """Process newly completed candle for order blocks"""
         if len(self.candles) < self.SWING_LENGTH * 2 + 1:
             return
+        
+        # Increment holding_counter for all open positions (Issue #6 fix)
+        for position in self.open_positions:
+            position.holding_counter += 1
         
         candle_list = list(self.candles)
         current_idx = len(candle_list) - 1
@@ -888,27 +989,29 @@ class Trading(Link):
         Per new2_testing: Select highest GREEN/BULLISH candle (close > open) before breakout.
         Choose by highest HIGH (not close).
         """
-        # Search window: from pivot to breakout
-        search_start = max(0, pivot_idx - self.ob_search_window)
-        search_end = breakout_idx
-        
-        # Find highest bullish candle (close > open) by HIGH
+        # Select candidate candle from the bars immediately BEFORE the breakout
+        # Match Latest_test.py semantics: search t-1 .. t-SWING_LENGTH (most recent swing_length bars)
         best_candle_idx = None
         highest_high = -float('inf')
-        
-        for i in range(search_start, search_end):
-            c = candles[i]
+        for j in range(1, self.SWING_LENGTH + 1):
+            idx = breakout_idx - j
+            if idx < 0:
+                break
+            c = candles[idx]
             if c.close > c.open and c.high > highest_high:
                 highest_high = c.high
-                best_candle_idx = i
-        
+                best_candle_idx = idx
+
+        # Fallback: choose the maximum high in the same backward window regardless of color
         if best_candle_idx is None:
-            # Fallback: choose maximum high regardless of color
-            for i in range(search_start, search_end):
-                c = candles[i]
+            for j in range(1, self.SWING_LENGTH + 1):
+                idx = breakout_idx - j
+                if idx < 0:
+                    break
+                c = candles[idx]
                 if c.high > highest_high:
                     highest_high = c.high
-                    best_candle_idx = i
+                    best_candle_idx = idx
         
         if best_candle_idx is None:
             return  # No suitable candle found
@@ -963,27 +1066,29 @@ class Trading(Link):
         Per new2_testing: Select lowest RED/BEARISH candle (close < open) before breakout.
         Choose by lowest LOW (not close).
         """
-        # Search window: from pivot to breakout
-        search_start = max(0, pivot_idx - self.ob_search_window)
-        search_end = breakout_idx
-        
-        # Find lowest bearish candle (close < open) by LOW
+        # Select candidate candle from the bars immediately BEFORE the breakout
+        # Match Latest_test.py semantics: search t-1 .. t-SWING_LENGTH (most recent swing_length bars)
         best_candle_idx = None
         lowest_low = float('inf')
-        
-        for i in range(search_start, search_end):
-            c = candles[i]
+        for j in range(1, self.SWING_LENGTH + 1):
+            idx = breakout_idx - j
+            if idx < 0:
+                break
+            c = candles[idx]
             if c.close < c.open and c.low < lowest_low:
                 lowest_low = c.low
-                best_candle_idx = i
-        
+                best_candle_idx = idx
+
+        # Fallback: choose the minimum low in the same backward window regardless of color
         if best_candle_idx is None:
-            # Fallback: choose minimum low regardless of color
-            for i in range(search_start, search_end):
-                c = candles[i]
+            for j in range(1, self.SWING_LENGTH + 1):
+                idx = breakout_idx - j
+                if idx < 0:
+                    break
+                c = candles[idx]
                 if c.low < lowest_low:
                     lowest_low = c.low
-                    best_candle_idx = i
+                    best_candle_idx = idx
         
         if best_candle_idx is None:
             return  # No suitable candle found
@@ -1223,19 +1328,29 @@ class Trading(Link):
                 capital_multiplier = self.SIDEWAYS_LEVERAGE_MULT
                 logger.info(f"Sideways market: applying {capital_multiplier}x capital multiplier")
         
-        # Calculate position size
+        # Calculate position size using entry-vs-OB distance (matches Latest_test.py)
         ob_size = ob.top - ob.btm
-        sl_distance = ob_size * self.STOP_LOSS_MULTIPLIER
         
-        # Apply minimum SL constraints
-        min_sl_atr = atr * self.OB_MIN_SL_ATR_MULT
-        min_sl_pct = entry_price * self.OB_MIN_SL_PCT
-        sl_distance = max(sl_distance, min_sl_atr, min_sl_pct)
+        # Base distance from entry to OB boundary
+        if signal_type == "long":
+            # For longs: SL below entry, measure distance to OB bottom
+            raw_dist = max(0.0, entry_price - ob.btm)
+        else:
+            # For shorts: SL above entry, measure distance to OB top
+            raw_dist = max(0.0, ob.top - entry_price)
+        
+        # Apply ATR and percentage floors to base distance
+        atr_floor_val = atr * self.OB_MIN_SL_ATR_MULT
+        pct_floor = entry_price * self.OB_MIN_SL_PCT
+        base_dist = max(raw_dist, atr_floor_val, pct_floor)
+        
+        # Scale by multiplier to get final SL distance
+        sl_distance = base_dist * self.STOP_LOSS_MULTIPLIER
         
         # Per new2_testing: Add position sizing risk floors to prevent huge positions when SL is tiny
         min_risk_floor = entry_price * self.MIN_RISK_PCT  # e.g., 0.2% of entry price
-        atr_half_floor = (atr * self.ATR_HALF_FLOOR) / 2.0  # e.g., 0.5 * ATR / 2
-        sl_distance = max(sl_distance, min_risk_floor, atr_half_floor)
+        atr_half_floor = atr * self.ATR_HALF_FLOOR  # e.g., 0.5 * ATR
+        risk_per_unit = max(sl_distance, min_risk_floor, atr_half_floor)
         
         # Guard against zero or negative sl_distance (Fix Issue #5)
         if sl_distance <= 0:
@@ -1266,7 +1381,7 @@ class Trading(Link):
         capital_for_sizing *= capital_multiplier
         
         risk_amount = capital_for_sizing * (self.RISK_PER_TRADE_PERCENT / 100)
-        position_size = risk_amount / sl_distance
+        position_size = risk_amount / (risk_per_unit if risk_per_unit > 0 else 1.0)
         
         # Apply max position size constraint
         position_value = position_size * entry_price
@@ -1288,8 +1403,14 @@ class Trading(Link):
             capital_at_risk=risk_amount,
             initial_stop_loss=stop_loss,
             highest_price=entry_price if signal_type == "long" else None,
-            lowest_price=entry_price if signal_type == "short" else None
+            lowest_price=entry_price if signal_type == "short" else None,
+            holding_counter=0  # Start at 0 for new position
         )
+        
+        # Reset holding_counter for same-side positions (reinforcing signal)
+        for pos in self.open_positions:
+            if pos.position_type == signal_type:
+                pos.holding_counter = 0
         
         logger.info(f"=== SIGNAL GENERATED ===")
         logger.info(f"Type: {signal_type.upper()} | Entry: {entry_price:.2f} | Size: {position_size:.4f}")
@@ -1344,21 +1465,48 @@ class Trading(Link):
                 
                 position.order_id = order_id
                 
+                # Try to extract actual fill price from create_market_order response
+                fill_px = (order_data.get('fill_price') or 
+                          order_data.get('order_price') or 
+                          order_data.get('price'))
+                if fill_px and position.actual_entry_price is None:
+                    try:
+                        position.actual_entry_price = float(fill_px)
+                        position.entry_filled_size = position.position_size
+                        logger.info(f"Set actual_entry_price from order response: {position.actual_entry_price:.2f}")
+                    except (ValueError, TypeError):
+                        pass
+                
                 # Track pending order or handle immediate fill
                 if order_id:
-                    self.pending_orders[order_id] = position
-                    logger.info(f"✓ Market order submitted: {side} {position.position_size:.4f} | Order ID: {order_id}")
+                    # Some venues return an order_id even when the market order is
+                    # immediately filled. Detect that case and treat as executed
+                    # (move to open_positions) instead of leaving in pending_orders.
+                    remain = order_data.get('remain_size')
+                    status = (order_data.get('status') or '').lower()
+                    filled_size = (order_data.get('filled_size') or order_data.get('fill_size') or order_data.get('filled') or 0)
+                    try:
+                        filled_qty = float(filled_size)
+                    except Exception:
+                        filled_qty = 0.0
+
+                    already_filled = (remain == 0) or (status in ('filled', 'closed')) or (filled_qty >= (position.position_size - 1e-9))
+
+                    if already_filled:
+                        # Treat as immediate fill
+                        logger.info(f"✓ Market order executed immediately (order_id given): {side} {position.position_size:.4f} | Order ID: {order_id}")
+                        self.open_positions.append(position)
+                        # Update fee delta after immediate fill
+                        self._update_fee_delta()
+                    else:
+                        self.pending_orders[order_id] = position
+                        logger.info(f"✓ Market order submitted: {side} {position.position_size:.4f} | Order ID: {order_id}")
                 else:
                     # Immediately filled - no order_id (Fix Issue #2)
-                    # Try to extract fill price and fee from order response
                     fill_price = (order_data.get('fill_price') or 
                                  order_data.get('fillPrice') or 
                                  order_data.get('price') or 
                                  order_data.get('avg_price'))
-                    
-                    fee = (order_data.get('fee') or 
-                          order_data.get('fee_amount') or 
-                          order_data.get('commission'))
                     
                     if fill_price:
                         try:
@@ -1370,18 +1518,10 @@ class Trading(Link):
                     else:
                         logger.info(f"✓ Market order filled immediately: {side} {position.position_size:.4f} (no fill price in response)")
                     
-                    if fee:
-                        try:
-                            fee_amount = abs(float(fee))
-                            position.entry_fees_paid = fee_amount
-                            self.total_fees_paid += fee_amount
-                            self.stats['total_fees'] += fee_amount
-                            logger.info(f"Entry fee from immediate fill: ${fee_amount:.4f}")
-                        except (ValueError, TypeError):
-                            logger.warning(f"Could not parse immediate fill fee: {fee}")
-                    
                     # Add to open positions immediately
                     self.open_positions.append(position)
+                    # Update fee delta after immediate fill
+                    self._update_fee_delta()
                 
                 self.positions.append(position)
                 self.stats['total_trades'] += 1
@@ -1431,10 +1571,9 @@ class Trading(Link):
                     should_close = True
                     exit_reason = "take_profit"
             
-            # Check holding period
+            # Check holding period (use counter, not index lookup - Issue #6 fix)
             if self.HOLDING_PERIOD_BARS > 0:
-                candles_held = len(self.candles) - self._get_candle_index_for_time(position.entry_time)
-                if candles_held >= self.HOLDING_PERIOD_BARS:
+                if position.holding_counter >= self.HOLDING_PERIOD_BARS:
                     should_close = True
                     exit_reason = "holding_period"
             
@@ -1449,12 +1588,20 @@ class Trading(Link):
     def check_trailing_stops(self):
         """
         Update and check trailing stops for open positions.
-        Implements the trailing stop logic from new2_testing.py.
+        Implements the full trailing stop logic from Latest_test.py including:
+        - ATR-aware trailing stop levels
+        - Progressive SL updates when price moves
+        - Buffer candles before allowing exit
         """
         if not self.current_price:
             return
         
         current_time = self.epoch_now
+        candle_list = list(self.candles)
+        current_idx = len(candle_list) - 1
+        
+        # Calculate ATR for trailing stop floor
+        atr = self.calculate_atr(candle_list, current_idx) if candle_list else 0.0
         
         for position in self.open_positions:
             # Update peak prices with None-safe comparisons
@@ -1472,7 +1619,6 @@ class Trading(Link):
             # Check if trailing should be activated
             if not position.trailing_active:
                 if position.position_type == "long":
-                    # Safe None check before arithmetic
                     if position.highest_price is not None:
                         profit = position.highest_price - position.entry_price
                         activation_threshold = position.sl_distance * self.TRAILING_STOP_ACTIVATION
@@ -1481,10 +1627,20 @@ class Trading(Link):
                             position.trailing_active = True
                             position.trailing_activation_time = current_time
                             position.trailing_activation_idx = self._get_candle_index_for_time(current_time)
-                            logger.info(f"Trailing stop activated for long position @ {self.current_price:.2f}")
+                            position.last_trailing_update_price = position.highest_price
+                            
+                            # Compute ATR-aware trailing stop level on activation
+                            pct_level = position.highest_price * (1 - self.TRAILING_STOP_PERCENT / 100)
+                            atr_level = position.highest_price - (self.TRAILING_ATR_MULT * atr)
+                            new_trailing_sl = max(pct_level, atr_level)
+                            
+                            # Move SL up immediately (only if higher than current SL)
+                            prev_sl = position.stop_loss
+                            position.stop_loss = max(position.stop_loss, new_trailing_sl)
+                            
+                            logger.info(f"Trailing stop activated for long @ {self.current_price:.2f} | SL {prev_sl:.2f} -> {position.stop_loss:.2f}")
                 
                 else:  # short
-                    # Safe None check before arithmetic
                     if position.lowest_price is not None:
                         profit = position.entry_price - position.lowest_price
                         activation_threshold = position.sl_distance * self.TRAILING_STOP_ACTIVATION
@@ -1493,32 +1649,67 @@ class Trading(Link):
                             position.trailing_active = True
                             position.trailing_activation_time = current_time
                             position.trailing_activation_idx = self._get_candle_index_for_time(current_time)
-                            logger.info(f"Trailing stop activated for short position @ {self.current_price:.2f}")
+                            position.last_trailing_update_price = position.lowest_price
+                            
+                            # Compute ATR-aware trailing stop level on activation
+                            pct_level = position.lowest_price * (1 + self.TRAILING_STOP_PERCENT / 100)
+                            atr_level = position.lowest_price + (self.TRAILING_ATR_MULT * atr)
+                            new_trailing_sl = min(pct_level, atr_level)
+                            
+                            # Move SL down immediately (only if lower than current SL)
+                            prev_sl = position.stop_loss
+                            position.stop_loss = min(position.stop_loss, new_trailing_sl)
+                            
+                            logger.info(f"Trailing stop activated for short @ {self.current_price:.2f} | SL {prev_sl:.2f} -> {position.stop_loss:.2f}")
             
-            # Check trailing stop exit
+            # Update trailing stop if active
             if position.trailing_active:
-                # Use candle count for buffer (matches Latest_test.py behavior)
                 current_candle_idx = self._get_candle_index_for_time(current_time)
                 candles_since_activation = current_candle_idx - position.trailing_activation_idx if position.trailing_activation_idx is not None else 999
                 
+                # Update SL if buffer allows and price moved enough
                 if candles_since_activation >= self.TRAILING_STOP_BUFFER_CANDLES:
                     if position.position_type == "long":
-                        # Trail from highest price (with None check)
-                        if position.highest_price is not None:
-                            trailing_stop = position.highest_price * (1 - self.TRAILING_STOP_PERCENT / 100)
+                        # Compute new ATR-aware trailing level
+                        pct_level = position.highest_price * (1 - self.TRAILING_STOP_PERCENT / 100)
+                        atr_level = position.highest_price - (self.TRAILING_ATR_MULT * atr)
+                        new_trailing_sl = max(pct_level, atr_level)
+                        
+                        # Only update if price moved enough since last update
+                        if position.last_trailing_update_price is not None:
+                            price_move_pct = ((position.highest_price - position.last_trailing_update_price) / position.last_trailing_update_price) * 100
                             
-                            if self.current_price <= trailing_stop:
-                                logger.info(f"Trailing stop hit for long: price {self.current_price:.2f} <= trail {trailing_stop:.2f}")
-                                self.close_position(position, self.current_price, "trailing_stop")
+                            if price_move_pct >= self.TRAILING_STOP_UPDATE_THRESHOLD:
+                                prev_sl = position.stop_loss
+                                position.stop_loss = max(position.stop_loss, new_trailing_sl)
+                                position.last_trailing_update_price = position.highest_price
+                                logger.info(f"Trailing SL updated for long: {prev_sl:.2f} -> {position.stop_loss:.2f} (price moved {price_move_pct:.2f}%)")
+                        
+                        # Check if trailing SL hit
+                        if self.current_price <= position.stop_loss:
+                            logger.info(f"Trailing stop hit for long: price {self.current_price:.2f} <= SL {position.stop_loss:.2f}")
+                            self.close_position(position, position.stop_loss, "trailing_stop")
                     
                     else:  # short
-                        # Trail from lowest price (with None check)
-                        if position.lowest_price is not None:
-                            trailing_stop = position.lowest_price * (1 + self.TRAILING_STOP_PERCENT / 100)
+                        # Compute new ATR-aware trailing level
+                        pct_level = position.lowest_price * (1 + self.TRAILING_STOP_PERCENT / 100)
+                        atr_level = position.lowest_price + (self.TRAILING_ATR_MULT * atr)
+                        new_trailing_sl = min(pct_level, atr_level)
+                        
+                        # Only update if price moved enough since last update
+                        if position.last_trailing_update_price is not None:
+                            price_move_pct = ((position.last_trailing_update_price - position.lowest_price) / position.last_trailing_update_price) * 100
                             
-                            if self.current_price >= trailing_stop:
-                                logger.info(f"Trailing stop hit for short: price {self.current_price:.2f} >= trail {trailing_stop:.2f}")
-                                self.close_position(position, self.current_price, "trailing_stop")
+                            if price_move_pct >= self.TRAILING_STOP_UPDATE_THRESHOLD:
+                                prev_sl = position.stop_loss
+                                position.stop_loss = min(position.stop_loss, new_trailing_sl)
+                                position.last_trailing_update_price = position.lowest_price
+                                logger.info(f"Trailing SL updated for short: {prev_sl:.2f} -> {position.stop_loss:.2f} (price moved {price_move_pct:.2f}%)")
+                        
+                        # Check if trailing SL hit
+                        if self.current_price >= position.stop_loss:
+                            logger.info(f"Trailing stop hit for short: price {self.current_price:.2f} >= SL {position.stop_loss:.2f}")
+                            self.close_position(position, position.stop_loss, "trailing_stop")
     
     
     def close_position(self, position: TradingPosition, exit_price: float, exit_reason: str):
@@ -1537,6 +1728,9 @@ class Trading(Link):
             
             logger.info(f"Closing {position.position_type} position: {side} {position.position_size:.4f} @ {exit_price:.2f} | Reason: {exit_reason}")
             
+            # Capture fee snapshot before close
+            fee_before_close = self.last_known_fees
+            
             resp = self.create_market_order(
                 self.VENUE,
                 self.SYMBOL,
@@ -1545,6 +1739,15 @@ class Trading(Link):
             )
             
             if resp and not resp.get('error'):
+                # Update fee delta to capture exit fees
+                self._update_fee_delta()
+                
+                # Calculate exit fee delta (difference from before close)
+                exit_fee_delta = self.last_known_fees - fee_before_close
+                if exit_fee_delta > 1e-6:
+                    position.exit_fees_paid = exit_fee_delta
+                    logger.info(f"Exit fee delta captured: {exit_fee_delta:.4f}")
+                
                 # Update position with exit info
                 position.exit_time = self.epoch_now
                 position.exit_reason = exit_reason
@@ -1564,23 +1767,16 @@ class Trading(Link):
                 
                 position.pnl_percent = (position.pnl / final_entry_price) * 100 if final_entry_price != 0 else 0
                 
-                # Calculate fees - use actual fees if available, otherwise estimate
-                if position.entry_fees_paid > 0 and position.exit_fees_paid > 0:
-                    # We have actual fees from fills
-                    total_fees = position.entry_fees_paid + position.exit_fees_paid
-                    logger.info(f"Using actual fees from fills: ${total_fees:.4f}")
+                # Calculate total fees from entry + exit
+                total_fees = position.entry_fees_paid + position.exit_fees_paid
+                
+                if total_fees > 0:
+                    logger.info(f"Using actual fees from delta tracking: ${total_fees:.4f} (entry: ${position.entry_fees_paid:.4f}, exit: ${position.exit_fees_paid:.4f})")
                 else:
-                    # Estimate commission only (slippage is already in actual fill prices as PnL impact)
-                    # Round-trip commission: entry + exit
+                    # Fallback estimate if delta tracking failed
                     estimated_commission = (final_entry_price + final_exit_price) * (self.COMMISSION_PERCENT / 100) * position.position_size
                     total_fees = estimated_commission
-                    
-                    # Update global stats with estimated fees (Fix Issue #4)
-                    self.total_fees_paid += estimated_commission
-                    self.stats['total_fees'] += estimated_commission
-                    
-                    logger.info(f"Using estimated commission (no fill data): ${estimated_commission:.4f}")
-                    logger.info(f"Note: Slippage already reflected in fill prices as PnL impact")
+                    logger.warning(f"Using estimated commission (delta tracking failed): ${estimated_commission:.4f}")
                 
                 position.pnl_dollars = (position.pnl * position.position_size) - total_fees
                 
@@ -1627,11 +1823,29 @@ class Trading(Link):
     
     
     def _get_candle_index_for_time(self, time_ms: int) -> int:
-        """Helper to find candle index for a given timestamp"""
+        """
+        Find candle index for a given timestamp.
+        Returns nearest candle index to avoid returning 0 on mismatch (Issue #4 fix).
+        """
+        if not self.candles:
+            return 0
+        
+        # Try exact match first
         for i, candle in enumerate(self.candles):
             if candle.time == time_ms:
                 return i
-        return 0
+        
+        # No exact match - find nearest candle by time
+        min_diff = float('inf')
+        nearest_idx = 0
+        
+        for i, candle in enumerate(self.candles):
+            diff = abs(candle.time - time_ms)
+            if diff < min_diff:
+                min_diff = diff
+                nearest_idx = i
+        
+        return nearest_idx
     
     
     # =========================
@@ -1777,10 +1991,27 @@ class Trading(Link):
         dynamic_loss_limit = -(self.MAX_LOSS_LIMIT - max(0, self.cumulative_pnl))
         loss_buffer_remaining = self.cumulative_pnl - dynamic_loss_limit
         
+        # Fetch live balance for accurate capital (fixes stale value issue)
+        live_capital = self.current_capital  # fallback to cached
+        try:
+            balance_resp = self.fetch_balances(self.VENUE)
+            if balance_resp and not balance_resp.get('error'):
+                balances = balance_resp.get('data', [])
+                for bal in balances:
+                    asset = bal.get('asset', '').upper()
+                    if asset in ['USD', 'USDT', 'USDC', 'BUSD']:
+                        amount = float(bal.get('amount', 0))
+                        if amount > 0:
+                            live_capital = amount
+                            break
+        except Exception as e:
+            logger.warning(f"get_status: failed to fetch live balance: {e}")
+        
         return {
             "running": self.running,
             "initialized": self.initialized,
-            "capital": self.current_capital,
+            "capital": live_capital,
+            "capital_cached": self.current_capital,  # show both for comparison
             "initial_capital": self.initial_capital,
             "cumulative_pnl": self.cumulative_pnl,
             "max_loss_limit": self.MAX_LOSS_LIMIT,
@@ -1917,6 +2148,8 @@ class Trading(Link):
                     "actual_exit_price": p.actual_exit_price,
                     "exit_reason": p.exit_reason,
                     "pnl_dollars": p.pnl_dollars,
+                    "entry_fees": p.entry_fees_paid,
+                    "exit_fees": p.exit_fees_paid,
                     "total_fees": p.entry_fees_paid + p.exit_fees_paid if p.exit_time else p.entry_fees_paid,
                     "used_actual_prices": p.actual_entry_price is not None and (p.actual_exit_price is not None if p.exit_time else True),
                     "status": "closed" if p.exit_time else "open"
@@ -1928,6 +2161,12 @@ class Trading(Link):
                 "open_count": len(self.open_positions),
                 "closed_count": len([p for p in self.positions if p.exit_time is not None]),
                 "pending_orders": len(self.pending_orders)
+            },
+            "fee_tracking": {
+                "fee_baseline": self.fee_baseline,
+                "last_known_fees": self.last_known_fees,
+                "total_fees_paid": self.total_fees_paid,
+                "stats_total_fees": self.stats['total_fees']
             },
             "parameters": {
                 "symbol": self.SYMBOL,
