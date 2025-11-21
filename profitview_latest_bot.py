@@ -66,6 +66,7 @@ class TradingPosition:
     holding_counter: int = 0  # Number of candles held without reinforcement
     
     order_id: Optional[str] = None  # ProfitView order ID
+    closing_order_id: Optional[str] = None  # Order ID used to close position
     
     # Actual fill tracking
     actual_entry_price: Optional[float] = None  # Weighted average fill price from exchange
@@ -73,6 +74,10 @@ class TradingPosition:
     entry_fees_paid: float = 0.0  # Actual fees from entry fills
     exit_fees_paid: float = 0.0  # Actual fees from exit fills
     is_closing: bool = False  # Flag to track if position is being closed
+    
+    # Fee attribution flags (prevent double-counting)
+    entry_fees_assigned: bool = False  # True if entry fees attributed via delta
+    exit_fees_assigned: bool = False  # True if exit fees attributed via delta
     
     # Partial fill tracking for weighted averages
     entry_filled_size: float = 0.0  # Cumulative filled size for entry
@@ -207,6 +212,7 @@ class Trading(Link):
         self.order_blocks: List[OrderBlock] = []
         self.positions: List[TradingPosition] = []
         self.open_positions: List[TradingPosition] = []
+        self.preexisting_positions: List[Dict] = []  # Positions that existed at startup
         
         # ==================
         # Pivot Tracking
@@ -262,6 +268,11 @@ class Trading(Link):
             'total_pnl': 0.0,
             'total_fees': 0.0
         }
+        
+        # ==================
+        # Diagnostics
+        # ==================
+        self.placement_count = 0  # Track order placements for debugging
         
         # NOW initialize parent Link class (this triggers callbacks!)
         super().__init__()
@@ -387,7 +398,9 @@ class Trading(Link):
     
     
     def close_all_positions(self):
-        """Close all ETH positions only (used on startup if init=True) with retry logic"""
+        """Close all ETH positions only (used on startup if init=True) with retry logic.
+        Also captures pre-existing position state for tracking.
+        """
         max_retries = 3
         retry_delay = 2  # seconds
         
@@ -405,6 +418,21 @@ class Trading(Link):
                     if not eth_positions:
                         logger.info("No ETH positions to close")
                         return
+                    
+                    # Capture pre-existing position state for tracking
+                    for pos in eth_positions:
+                        preexist = {
+                            'sym': pos.get('sym'),
+                            'side': pos.get('side'),
+                            'pos_size': pos.get('pos_size'),
+                            'entry_price': pos.get('entry_price'),
+                            'mark_price': pos.get('mark_price'),
+                            'fees': pos.get('fees', 0.0),
+                            'time': pos.get('time'),
+                            'captured_at_startup': self.epoch_now
+                        }
+                        self.preexisting_positions.append(preexist)
+                        logger.info(f"Captured pre-existing position: {pos['side']} {pos['pos_size']} @ {pos.get('entry_price')} | Fees: {pos.get('fees', 0.0)}")
                     
                     for pos in eth_positions:
                         side = 'Buy' if pos['side'] == 'Sell' else 'Sell'
@@ -567,6 +595,15 @@ class Trading(Link):
         if remain_size == 0 and order_id in self.pending_orders:
             position = self.pending_orders[order_id]
             logger.info(f"✓ Order filled: {position.position_type} position opened")
+            
+            # Set defaults for SL/peak tracking if not already set (Edge Case Fix #1)
+            if position.initial_stop_loss is None:
+                position.initial_stop_loss = position.stop_loss
+            if position.position_type == "long" and position.highest_price is None:
+                position.highest_price = position.actual_entry_price or position.entry_price
+            if position.position_type == "short" and position.lowest_price is None:
+                position.lowest_price = position.actual_entry_price or position.entry_price
+            
             self.open_positions.append(position)
             del self.pending_orders[order_id]
             # Update fee delta after position opened
@@ -610,14 +647,65 @@ class Trading(Link):
         fee_amount = 0.0
         if fee:
             try:
-                fee_amount = abs(float(fee))  # Ensure positive
+                fee_amount = abs(float(fee))
             except (ValueError, TypeError):
-                logger.warning(f"Could not parse fee: {fee}")
-        
-        # Update global fee tracking
+                logger.warning(f"Could not parse fee value from fill_update: {fee}")
+                fee_amount = 0.0
+
+        # --- Fee attribution: avoid double-counting between position-delta attribution
+        # and fill update payloads. Prefer attributing to a matching pending order
+        # (entry) or to a closing open position (exit). If already assigned, skip.
         if fee_amount > 0:
-            self.total_fees_paid += fee_amount
-            self.stats['total_fees'] += fee_amount
+            attributed = False
+            # Prefer matching pending order (entry fees)
+            if order_id and order_id in self.pending_orders:
+                pos = self.pending_orders[order_id]
+                if not getattr(pos, 'entry_fees_assigned', False):
+                    pos.entry_fees_paid = getattr(pos, 'entry_fees_paid', 0.0) + fee_amount
+                    pos.entry_fees_assigned = True
+                    try:
+                        self.total_fees_paid = getattr(self, 'total_fees_paid', 0.0) + fee_amount
+                    except Exception:
+                        self.total_fees_paid = fee_amount
+                    try:
+                        self.stats['total_fees'] = self.stats.get('total_fees', 0.0) + fee_amount
+                    except Exception:
+                        self.stats['total_fees'] = self.stats.get('total_fees', 0.0)
+                    attributed = True
+                    logger.info(f"fill_update: attributed entry fee {fee_amount:.6f} to pending order {order_id}")
+                else:
+                    logger.debug(f"fill_update: entry fees already assigned for order {order_id}; skipping fee add")
+            else:
+                # Try matching to an open position being closed (exit fees)
+                for p in self.open_positions:
+                    if (order_id and getattr(p, 'order_id', None) == order_id) or getattr(p, 'is_closing', False):
+                        if not getattr(p, 'exit_fees_assigned', False):
+                            p.exit_fees_paid = getattr(p, 'exit_fees_paid', 0.0) + fee_amount
+                            p.exit_fees_assigned = True
+                            try:
+                                self.total_fees_paid = getattr(self, 'total_fees_paid', 0.0) + fee_amount
+                            except Exception:
+                                self.total_fees_paid = fee_amount
+                            try:
+                                self.stats['total_fees'] = self.stats.get('total_fees', 0.0) + fee_amount
+                            except Exception:
+                                self.stats['total_fees'] = self.stats.get('total_fees', 0.0)
+                            attributed = True
+                            logger.info(f"fill_update: attributed exit fee {fee_amount:.6f} to open position (order {order_id})")
+                        else:
+                            logger.debug(f"fill_update: exit fees already assigned for open position (order {order_id}); skipping fee add")
+                        break
+            # Unmatched: add to global totals and log
+            if not attributed:
+                try:
+                    self.total_fees_paid = getattr(self, 'total_fees_paid', 0.0) + fee_amount
+                except Exception:
+                    self.total_fees_paid = fee_amount
+                try:
+                    self.stats['total_fees'] = self.stats.get('total_fees', 0.0) + fee_amount
+                except Exception:
+                    self.stats['total_fees'] = self.stats.get('total_fees', 0.0)
+                logger.info(f"fill_update: unmatched fee added to totals: {fee_amount:.6f}")
         
         # Parse fill price and size
         try:
@@ -654,24 +742,36 @@ class Trading(Link):
         
         # Exit fills: check if any open position is currently closing
         elif fill_price_float and fill_size_float:
-            for position in self.open_positions:
-                if position.is_closing:
-                    # Weighted average calculation for exit
-                    if position.actual_exit_price is None:
-                        position.actual_exit_price = fill_price_float
-                        position.exit_filled_size = fill_size_float
-                    else:
-                        # Weighted average
-                        total_size = position.exit_filled_size + fill_size_float
-                        position.actual_exit_price = (
-                            (position.actual_exit_price * position.exit_filled_size + 
-                             fill_price_float * fill_size_float) / total_size
-                        )
-                        position.exit_filled_size = total_size
-                    
-                    logger.info(f"Exit Fill: {side} {fill_size_float:.4f} @ {fill_price_float:.2f} | "
-                              f"Avg Exit: {position.actual_exit_price:.2f}")
-                    break
+            # Match by order_id first (most accurate), then fallback to is_closing (Edge Case Fix #4)
+            matched_position = None
+            if order_id:
+                for position in self.open_positions:
+                    if position.closing_order_id == order_id:
+                        matched_position = position
+                        break
+            # Fallback: match by is_closing flag
+            if not matched_position:
+                for position in self.open_positions:
+                    if position.is_closing:
+                        matched_position = position
+                        break
+            
+            if matched_position:
+                # Weighted average calculation for exit
+                if matched_position.actual_exit_price is None:
+                    matched_position.actual_exit_price = fill_price_float
+                    matched_position.exit_filled_size = fill_size_float
+                else:
+                    # Weighted average
+                    total_size = matched_position.exit_filled_size + fill_size_float
+                    matched_position.actual_exit_price = (
+                        (matched_position.actual_exit_price * matched_position.exit_filled_size + 
+                         fill_price_float * fill_size_float) / total_size
+                    )
+                    matched_position.exit_filled_size = total_size
+                
+                logger.info(f"Exit Fill: {side} {fill_size_float:.4f} @ {fill_price_float:.2f} | "
+                          f"Avg Exit: {matched_position.actual_exit_price:.2f}")
         
         # Fallback logging if we couldn't match to a position
         if not order_id or order_id not in self.pending_orders:
@@ -758,8 +858,12 @@ class Trading(Link):
             self.check_exit_conditions()
     
     
-    def _update_fee_delta(self):
-        """Update fee delta from fetch_positions and attribute to recent position."""
+    def _update_fee_delta(self, is_exit: bool = False):
+        """Update fee delta from fetch_positions and attribute to matching position.
+        
+        Args:
+            is_exit: If True, this is an exit fee; attribute to closing position
+        """
         try:
             resp = self.fetch_positions(self.VENUE)
             if resp and not resp.get('error'):
@@ -770,28 +874,107 @@ class Trading(Link):
                         fee_delta = current_fees - self.last_known_fees
                         
                         if fee_delta > 1e-6:  # Meaningful delta
-                            # Attribute to most recent open position (best effort)
-                            if self.open_positions:
-                                recent_pos = self.open_positions[-1]
-                                recent_pos.entry_fees_paid += fee_delta
-                                logger.info(f"Fee delta attributed: +{fee_delta:.4f} to position (total: {recent_pos.entry_fees_paid:.4f})")
+                            attributed = False
                             
-                            self.total_fees_paid += fee_delta
-                            self.stats['total_fees'] += fee_delta
-                            self.last_known_fees = current_fees
+                            if is_exit:
+                                # Attribute exit fee to closing position
+                                for p in self.open_positions:
+                                    if p.is_closing and not p.exit_fees_assigned:
+                                        p.exit_fees_paid += fee_delta
+                                        p.exit_fees_assigned = True
+                                        attributed = True
+                                        logger.info(f"Exit fee delta attributed: +{fee_delta:.4f} to closing position")
+                                        break
+                            else:
+                                # Attribute entry fee to most recent pending order → open position
+                                # Priority: pending_orders (most recent), then open_positions (most recent)
+                                if self.pending_orders:
+                                    # Get most recent pending order by creation order
+                                    recent_order_id = list(self.pending_orders.keys())[-1]
+                                    p = self.pending_orders[recent_order_id]
+                                    if not p.entry_fees_assigned:
+                                        p.entry_fees_paid += fee_delta
+                                        p.entry_fees_assigned = True
+                                        attributed = True
+                                        logger.info(f"Entry fee delta attributed: +{fee_delta:.4f} to pending order {recent_order_id}")
+                                elif self.open_positions:
+                                    p = self.open_positions[-1]
+                                    if not p.entry_fees_assigned:
+                                        p.entry_fees_paid += fee_delta
+                                        p.entry_fees_assigned = True
+                                        attributed = True
+                                        logger.info(f"Entry fee delta attributed: +{fee_delta:.4f} to open position (fallback)")
+                            
+                            if attributed:
+                                self.total_fees_paid += fee_delta
+                                self.stats['total_fees'] += fee_delta
+                                self.last_known_fees = current_fees
+                            else:
+                                logger.warning(f"Fee delta {fee_delta:.4f} could not be attributed (no matching position)")
                         return
         except Exception as e:
             logger.warning(f"Failed to update fee delta: {e}")
     
     def _reconcile_pending_orders(self):
-        """Check if pending orders have been filled (reconciliation if callbacks missed)."""
+        """Check if pending orders have been filled (reconciliation if callbacks missed).
+        
+        Critical: Only checks orders for self.SYMBOL (other algos may be trading other symbols).
+        Falls back to fetch_positions if fetch_open_orders unavailable (paper venue).
+        """
         if not self.pending_orders:
             return
         
         try:
             resp = self.fetch_open_orders(self.VENUE)
+            
+            # Check if fetch_open_orders is unavailable (paper venue)
+            if resp and resp.get('error'):
+                error_type = resp['error'].get('type') if isinstance(resp.get('error'), dict) else None
+                error_msg = resp['error'].get('message', '') if isinstance(resp.get('error'), dict) else str(resp.get('error', ''))
+                
+                if error_type == 'api' or 'not available' in error_msg.lower():
+                    logger.info("fetch_open_orders unavailable (paper venue), using fetch_positions fallback")
+                    # Fallback: use fetch_positions to detect if order was filled
+                    pos_resp = self.fetch_positions(self.VENUE)
+                    if pos_resp and not pos_resp.get('error'):
+                        positions = pos_resp.get('data', [])
+                        # Filter to only our symbol
+                        our_positions = [p for p in positions if p.get('sym') == self.SYMBOL]
+                        
+                        if our_positions:
+                            # If position exists and pending orders exist, check if size/side matches
+                            # (Edge Case Fix #6: avoid false reconciliation from other algos)
+                            pos = our_positions[0]
+                            pos_size = float(pos.get('pos_size', 0))
+                            pos_side = pos.get('side')
+                            
+                            for order_id, position in list(self.pending_orders.items()):
+                                # Match by side and approximate size (±1% tolerance)
+                                expected_side = 'Buy' if position.position_type == 'long' else 'Sell'
+                                size_match = abs(pos_size - position.position_size) / position.position_size < 0.01 if position.position_size > 0 else False
+                                
+                                if pos_side == expected_side and (size_match or pos_size != 0):
+                                    logger.info(f"Reconciliation (positions fallback): order {order_id} likely filled (side={pos_side}, pos_size={pos_size:.4f}, expected={position.position_size:.4f})")
+                                    
+                                    # Set defaults for SL/peak tracking (Edge Case Fix #1)
+                                    if position.initial_stop_loss is None:
+                                        position.initial_stop_loss = position.stop_loss
+                                    if position.position_type == "long" and position.highest_price is None:
+                                        position.highest_price = position.actual_entry_price or position.entry_price
+                                    if position.position_type == "short" and position.lowest_price is None:
+                                        position.lowest_price = position.actual_entry_price or position.entry_price
+                                    
+                                    self.open_positions.append(position)
+                                    del self.pending_orders[order_id]
+                                    self._update_fee_delta(is_exit=False)
+                                else:
+                                    logger.warning(f"Reconciliation skipped for order {order_id}: side/size mismatch (pos_side={pos_side}, expected={expected_side}, pos_size={pos_size:.4f}, expected={position.position_size:.4f})")
+                    return
+            
             if resp and not resp.get('error'):
-                open_order_ids = {o.get('order_id') for o in resp.get('data', [])}
+                open_orders = resp.get('data', [])
+                # CRITICAL: Filter to only our symbol (BTC algo may have other orders)
+                open_order_ids = {o.get('order_id') for o in open_orders if o.get('sym') == self.SYMBOL}
                 
                 # Check if any pending order is no longer open (was filled)
                 filled_orders = []
@@ -801,9 +984,18 @@ class Trading(Link):
                 
                 for order_id, position in filled_orders:
                     logger.info(f"Reconciliation: order {order_id} was filled (moved to open)")
+                    
+                    # Set defaults for SL/peak tracking (Edge Case Fix #1)
+                    if position.initial_stop_loss is None:
+                        position.initial_stop_loss = position.stop_loss
+                    if position.position_type == "long" and position.highest_price is None:
+                        position.highest_price = position.actual_entry_price or position.entry_price
+                    if position.position_type == "short" and position.lowest_price is None:
+                        position.lowest_price = position.actual_entry_price or position.entry_price
+                    
                     self.open_positions.append(position)
                     del self.pending_orders[order_id]
-                    self._update_fee_delta()
+                    self._update_fee_delta(is_exit=False)
         except Exception as e:
             logger.warning(f"Failed to reconcile pending orders: {e}")
     
@@ -883,9 +1075,15 @@ class Trading(Link):
         current_idx = len(candle_list) - 1
         
         # Check for pivot confirmation at swing_length bars back
-        pivot_idx = current_idx
-        self.check_pivot_high(candle_list, pivot_idx)
-        self.check_pivot_low(candle_list, pivot_idx)
+        # The pivot center that is just being confirmed occurs `SWING_LENGTH` bars ago.
+        # Use center_idx = current_idx - self.SWING_LENGTH so that check_pivot_* can validate
+        # highs/lows across `SWING_LENGTH` bars on either side and set the confirmation
+        # index (center + SWING_LENGTH == current_idx).
+        pivot_center_idx = current_idx - self.SWING_LENGTH
+        if pivot_center_idx >= 0:
+            self.check_pivot_high(candle_list, pivot_center_idx)
+            self.check_pivot_low(candle_list, pivot_center_idx)
+            logger.debug(f"Pivot confirmation check at center {pivot_center_idx} (confirmed at {current_idx})")
         
         # Check for breakouts at current candle
         self.check_breakouts(candle_list, current_idx)
@@ -1449,9 +1647,13 @@ class Trading(Link):
         """
         Execute market order to open position.
         Per ProfitView docs: create_market_order returns {'data': {'order_id': str, ...}}
-        Handles immediate fills (Fix Issue #2)
+        Handles immediate fills and polls for async callback reconciliation.
         """
         try:
+            # Increment placement counter for diagnostics
+            self.placement_count += 1
+            logger.info(f"Executing order (placement #{self.placement_count}): {side} {position.position_size:.4f}")
+            
             resp = self.create_market_order(
                 self.VENUE,
                 self.SYMBOL,
@@ -1495,6 +1697,15 @@ class Trading(Link):
                     if already_filled:
                         # Treat as immediate fill
                         logger.info(f"✓ Market order executed immediately (order_id given): {side} {position.position_size:.4f} | Order ID: {order_id}")
+                        
+                        # Set defaults for SL/peak tracking (Edge Case Fix #1)
+                        if position.initial_stop_loss is None:
+                            position.initial_stop_loss = position.stop_loss
+                        if position.position_type == "long" and position.highest_price is None:
+                            position.highest_price = position.actual_entry_price or position.entry_price
+                        if position.position_type == "short" and position.lowest_price is None:
+                            position.lowest_price = position.actual_entry_price or position.entry_price
+                        
                         self.open_positions.append(position)
                         # Update fee delta after immediate fill
                         self._update_fee_delta()
@@ -1518,6 +1729,14 @@ class Trading(Link):
                     else:
                         logger.info(f"✓ Market order filled immediately: {side} {position.position_size:.4f} (no fill price in response)")
                     
+                    # Set defaults for SL/peak tracking (Edge Case Fix #1)
+                    if position.initial_stop_loss is None:
+                        position.initial_stop_loss = position.stop_loss
+                    if position.position_type == "long" and position.highest_price is None:
+                        position.highest_price = position.actual_entry_price or position.entry_price
+                    if position.position_type == "short" and position.lowest_price is None:
+                        position.lowest_price = position.actual_entry_price or position.entry_price
+                    
                     # Add to open positions immediately
                     self.open_positions.append(position)
                     # Update fee delta after immediate fill
@@ -1525,6 +1744,22 @@ class Trading(Link):
                 
                 self.positions.append(position)
                 self.stats['total_trades'] += 1
+                
+                # Poll briefly to reconcile if async callbacks are delayed/missing
+                # (Most important for paper venues that may not push callbacks reliably)
+                if order_id and order_id in self.pending_orders:
+                    import time
+                    for poll_attempt in range(3):  # Poll up to 3 times, 1 second apart
+                        time.sleep(1.0)
+                        # Check if order was filled via callbacks
+                        if order_id not in self.pending_orders:
+                            logger.info(f"Order {order_id} filled via callback during polling")
+                            break
+                        # Try reconciliation
+                        self._reconcile_pending_orders()
+                        if order_id not in self.pending_orders:
+                            logger.info(f"Order {order_id} reconciled via polling (attempt {poll_attempt + 1})")
+                            break
             
             else:
                 error = resp.get('error') if resp else 'No response'
@@ -1542,7 +1777,13 @@ class Trading(Link):
         Check if any open positions should be closed.
         Checks SL, TP, and holding period.
         """
-        if not self.current_price:
+        # Edge Case Fix #3: Use fallback price if current_price not set
+        price = self.current_price
+        if price is None and self.candles:
+            price = self.candles[-1].close
+            logger.debug(f"Using fallback price from last candle: {price:.2f}")
+        
+        if not price:
             return
         
         positions_to_close = []
@@ -1553,21 +1794,21 @@ class Trading(Link):
             
             # Check stop loss
             if position.position_type == "long":
-                if self.current_price <= position.stop_loss:
+                if price <= position.stop_loss:
                     should_close = True
                     exit_reason = "stop_loss"
             else:  # short
-                if self.current_price >= position.stop_loss:
+                if price >= position.stop_loss:
                     should_close = True
                     exit_reason = "stop_loss"
             
             # Check take profit
             if position.position_type == "long":
-                if self.current_price >= position.take_profit:
+                if price >= position.take_profit:
                     should_close = True
                     exit_reason = "take_profit"
             else:  # short
-                if self.current_price <= position.take_profit:
+                if price <= position.take_profit:
                     should_close = True
                     exit_reason = "take_profit"
             
@@ -1582,7 +1823,7 @@ class Trading(Link):
         
         # Close positions
         for position, reason in positions_to_close:
-            self.close_position(position, self.current_price, reason)
+            self.close_position(position, price, reason)
     
     
     def check_trailing_stops(self):
@@ -1593,7 +1834,13 @@ class Trading(Link):
         - Progressive SL updates when price moves
         - Buffer candles before allowing exit
         """
-        if not self.current_price:
+        # Edge Case Fix #3: Use fallback price if current_price not set
+        price = self.current_price
+        if price is None and self.candles:
+            price = self.candles[-1].close
+            logger.debug(f"Trailing stops: using fallback price from last candle: {price:.2f}")
+        
+        if not price:
             return
         
         current_time = self.epoch_now
@@ -1604,17 +1851,17 @@ class Trading(Link):
         atr = self.calculate_atr(candle_list, current_idx) if candle_list else 0.0
         
         for position in self.open_positions:
-            # Update peak prices with None-safe comparisons
+            # Update peak prices with None-safe comparisons (Edge Case Fix #1)
             if position.position_type == "long":
                 if position.highest_price is None:
-                    position.highest_price = self.current_price
-                elif self.current_price > position.highest_price:
-                    position.highest_price = self.current_price
+                    position.highest_price = price
+                elif price > position.highest_price:
+                    position.highest_price = price
             else:  # short
                 if position.lowest_price is None:
-                    position.lowest_price = self.current_price
-                elif self.current_price < position.lowest_price:
-                    position.lowest_price = self.current_price
+                    position.lowest_price = price
+                elif price < position.lowest_price:
+                    position.lowest_price = price
             
             # Check if trailing should be activated
             if not position.trailing_active:
@@ -1638,7 +1885,7 @@ class Trading(Link):
                             prev_sl = position.stop_loss
                             position.stop_loss = max(position.stop_loss, new_trailing_sl)
                             
-                            logger.info(f"Trailing stop activated for long @ {self.current_price:.2f} | SL {prev_sl:.2f} -> {position.stop_loss:.2f}")
+                            logger.info(f"Trailing stop activated for long @ {price:.2f} | SL {prev_sl:.2f} -> {position.stop_loss:.2f}")
                 
                 else:  # short
                     if position.lowest_price is not None:
@@ -1660,7 +1907,7 @@ class Trading(Link):
                             prev_sl = position.stop_loss
                             position.stop_loss = min(position.stop_loss, new_trailing_sl)
                             
-                            logger.info(f"Trailing stop activated for short @ {self.current_price:.2f} | SL {prev_sl:.2f} -> {position.stop_loss:.2f}")
+                            logger.info(f"Trailing stop activated for short @ {price:.2f} | SL {prev_sl:.2f} -> {position.stop_loss:.2f}")
             
             # Update trailing stop if active
             if position.trailing_active:
@@ -1686,8 +1933,8 @@ class Trading(Link):
                                 logger.info(f"Trailing SL updated for long: {prev_sl:.2f} -> {position.stop_loss:.2f} (price moved {price_move_pct:.2f}%)")
                         
                         # Check if trailing SL hit
-                        if self.current_price <= position.stop_loss:
-                            logger.info(f"Trailing stop hit for long: price {self.current_price:.2f} <= SL {position.stop_loss:.2f}")
+                        if price <= position.stop_loss:
+                            logger.info(f"Trailing stop hit for long: price {price:.2f} <= SL {position.stop_loss:.2f}")
                             self.close_position(position, position.stop_loss, "trailing_stop")
                     
                     else:  # short
@@ -1707,8 +1954,8 @@ class Trading(Link):
                                 logger.info(f"Trailing SL updated for short: {prev_sl:.2f} -> {position.stop_loss:.2f} (price moved {price_move_pct:.2f}%)")
                         
                         # Check if trailing SL hit
-                        if self.current_price >= position.stop_loss:
-                            logger.info(f"Trailing stop hit for short: price {self.current_price:.2f} >= SL {position.stop_loss:.2f}")
+                        if price >= position.stop_loss:
+                            logger.info(f"Trailing stop hit for short: price {price:.2f} >= SL {position.stop_loss:.2f}")
                             self.close_position(position, position.stop_loss, "trailing_stop")
     
     
@@ -1739,14 +1986,15 @@ class Trading(Link):
             )
             
             if resp and not resp.get('error'):
-                # Update fee delta to capture exit fees
-                self._update_fee_delta()
+                # Store closing order_id for accurate exit fill matching (Edge Case Fix #4)
+                order_data = resp.get('data', {})
+                closing_order_id = order_data.get('order_id')
+                if closing_order_id:
+                    position.closing_order_id = closing_order_id
+                    logger.info(f"Closing order ID: {closing_order_id}")
                 
-                # Calculate exit fee delta (difference from before close)
-                exit_fee_delta = self.last_known_fees - fee_before_close
-                if exit_fee_delta > 1e-6:
-                    position.exit_fees_paid = exit_fee_delta
-                    logger.info(f"Exit fee delta captured: {exit_fee_delta:.4f}")
+                # Update fee delta to capture exit fees
+                self._update_fee_delta(is_exit=True)
                 
                 # Update position with exit info
                 position.exit_time = self.epoch_now
@@ -2014,12 +2262,14 @@ class Trading(Link):
             "capital_cached": self.current_capital,  # show both for comparison
             "initial_capital": self.initial_capital,
             "cumulative_pnl": self.cumulative_pnl,
+            "placement_count": self.placement_count,
             "max_loss_limit": self.MAX_LOSS_LIMIT,
             "dynamic_loss_limit": dynamic_loss_limit,
             "loss_buffer_remaining": loss_buffer_remaining,
             "max_loss_reached": self.max_loss_reached,
             "open_positions": len(self.open_positions),
             "pending_orders": len(self.pending_orders),
+            "preexisting_positions_at_startup": len(self.preexisting_positions),
             "active_order_blocks": len([ob for ob in self.order_blocks if ob.active]),
             "total_order_blocks": len(self.order_blocks),
             "candles_loaded": len(self.candles),
@@ -2151,6 +2401,8 @@ class Trading(Link):
                     "entry_fees": p.entry_fees_paid,
                     "exit_fees": p.exit_fees_paid,
                     "total_fees": p.entry_fees_paid + p.exit_fees_paid if p.exit_time else p.entry_fees_paid,
+                    "entry_fees_assigned": p.entry_fees_assigned,
+                    "exit_fees_assigned": p.exit_fees_assigned if p.exit_time else None,
                     "used_actual_prices": p.actual_entry_price is not None and (p.actual_exit_price is not None if p.exit_time else True),
                     "status": "closed" if p.exit_time else "open"
                 }
@@ -2160,8 +2412,10 @@ class Trading(Link):
                 "total_positions": len(self.positions),
                 "open_count": len(self.open_positions),
                 "closed_count": len([p for p in self.positions if p.exit_time is not None]),
-                "pending_orders": len(self.pending_orders)
+                "pending_orders": len(self.pending_orders),
+                "preexisting_count": len(self.preexisting_positions)
             },
+            "preexisting_positions": self.preexisting_positions,
             "fee_tracking": {
                 "fee_baseline": self.fee_baseline,
                 "last_known_fees": self.last_known_fees,
@@ -2257,7 +2511,8 @@ class Trading(Link):
                     "bullish_str": ob.bullish_str,
                     "bearish_str": ob.bearish_str,
                     "total_vol": ob.vol,
-                    "strength_ratio": (ob.bullish_str / ob.vol if ob.kind == "bullish" else ob.bearish_str / ob.vol) if ob.vol > 0 else 0
+                    "strength_ratio": (ob.bullish_str / ob.vol if ob.kind == "bullish" else ob.bearish_str / ob.vol) if ob.vol > 0 else 0,
+                    "active": ob.active
                 }
                 for ob in active_obs
             ],

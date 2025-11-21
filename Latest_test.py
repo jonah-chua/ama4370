@@ -1405,7 +1405,7 @@ def plot_with_obs(df: pd.DataFrame, obs: List[OrderBlock], signals: List[Signal]
     sell_prices = [s.price for s in signals if s.kind == 'sell']
 
     if buy_times:
-        ax.scatter(pd.to_datetime(buy_times, unit='ms'), buy_prices, marker='^', color='green, s=80, zorder=10, label='buy')
+        ax.scatter(pd.to_datetime(buy_times, unit='ms'), buy_prices, marker='^', color='green', s=80, zorder=10, label='buy')
     if sell_times:
         ax.scatter(pd.to_datetime(sell_times, unit='ms'), sell_prices, marker='v', color='red', s=80, zorder=10, label='sell')
 
@@ -1869,8 +1869,8 @@ def inspect_signal_context(df: pd.DataFrame, obs: List[OrderBlock], signals: Lis
 
 coin = "ETHUSDT"                  # trading pair
 timeframe = '15m'                  # timeframe for candles
-start = "2025-10-27"                # start date for data collection
-end = "2025-11-11"                  # end date for data collection
+start = "2025-11-16"                # start date for data collection
+end = "2025-11-20"                  # end date for data collection
 
 
 reverse_signals = False              # if True, invert buy/sell signals (for testing)
@@ -1924,7 +1924,7 @@ holding_period_bars = 480
 
 # Capital management parameters
 initial_capital = 5000.0          # starting capital in USD (or your currency)
-risk_per_trade_percent = 3.0       # risk this % of capital per trade (used for position sizing)
+risk_per_trade_percent = 3       # risk this % of capital per trade (used for position sizing)
 use_fixed_capital = True           # if True, always use initial capital for position sizing (no compounding)
 max_position_size_usd = 100000.0   # maximum position value in USD (prevents unrealistic large positions)
 
@@ -1946,18 +1946,11 @@ entry_diff_short_pct = 0.03
 # Placeholder for data, it's commented out intentionally to prevent repeated fetching
 data = None  #data is already in cache so this is intentionally
 
-import sys, os
-from pathlib import Path
-
-# Ensure project root (script folder) is on sys.path so local modules can be imported.
-repo_root = Path(__file__).resolve().parent
-if str(repo_root) not in sys.path:
-    sys.path.insert(0, str(repo_root))
-
 # =========================
 # Example / entry point
 # =========================
 if __name__ == "__main__":
+    import sys
 
     # Import BinanceDataCollector here so the module can be imported elsewhere
     # without requiring `requests` to be installed at import-time.
@@ -1966,11 +1959,12 @@ if __name__ == "__main__":
             # first try normal package import
             from binance.binance_collector import BinanceDataCollector
         except Exception as e:
-            print("BinanceDataCollector not available via package import:", e)
             BinanceDataCollector = None
             # attempt to find binance_collector.py in sensible locations and import it by path
             try:
+                print('package missing, trying this area')
                 from importlib import util
+                from pathlib import Path
                 search_bases = [
                     Path(__file__).resolve().parent,
                     Path.cwd(),
