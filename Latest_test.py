@@ -1152,14 +1152,9 @@ def detect_order_blocks(df: pd.DataFrame,
                                 atr_half_floor = atr_val_here * 0.5  # half-ATR floor
                                 risk_per_unit = max(sl_distance, min_risk_per_unit, atr_half_floor)
                                 position_size = capital_at_risk / (risk_per_unit if risk_per_unit > 0 else 1.0)
-
-                                # Apply maximum position size constraint
                                 max_units = max_position_size_usd / entry_price if entry_price > 0 else position_size
                                 position_size = min(position_size, max_units)
-
-                                # Recalculate actual capital at risk based on constrained position size
                                 actual_capital_at_risk = position_size * risk_per_unit
-
                                 position = Position(
                                     entry_idx=sig_idx,
                                     entry_time=df['timestamp'].iat[sig_idx],
@@ -1874,8 +1869,8 @@ def inspect_signal_context(df: pd.DataFrame, obs: List[OrderBlock], signals: Lis
 
 coin = "ETHUSDT"                  # trading pair
 timeframe = '15m'                  # timeframe for candles
-start = "2025-11-30"                # start date for data collection
-end = "2025-12-02"                  # end date for data collection
+start = "2025-11-16"                # start date for data collection
+end = "2025-11-20"                  # end date for data collection
 
 
 reverse_signals = False              # if True, invert buy/sell signals (for testing)
@@ -1929,7 +1924,7 @@ holding_period_bars = 480
 
 # Capital management parameters
 initial_capital = 5000.0          # starting capital in USD (or your currency)
-risk_per_trade_percent = 3.0       # risk this % of capital per trade (used for position sizing)
+risk_per_trade_percent = 3       # risk this % of capital per trade (used for position sizing)
 use_fixed_capital = True           # if True, always use initial capital for position sizing (no compounding)
 max_position_size_usd = 100000.0   # maximum position value in USD (prevents unrealistic large positions)
 
@@ -1955,16 +1950,52 @@ data = None  #data is already in cache so this is intentionally
 # Example / entry point
 # =========================
 if __name__ == "__main__":
+    import sys
 
     # Import BinanceDataCollector here so the module can be imported elsewhere
     # without requiring `requests` to be installed at import-time.
     if data is None:
         try:
-            from binance_collector import BinanceDataCollector
-            
+            # first try normal package import
+            from binance.binance_collector import BinanceDataCollector
         except Exception as e:
-            print("BinanceDataCollector not available:", e)
             BinanceDataCollector = None
+            # attempt to find binance_collector.py in sensible locations and import it by path
+            try:
+                print('package missing, trying this area')
+                from importlib import util
+                from pathlib import Path
+                search_bases = [
+                    Path(__file__).resolve().parent,
+                    Path.cwd(),
+                    Path.home()
+                ]
+                found = None
+                for base in search_bases:
+                    try:
+                        for p in base.rglob("binance_collector.py"):
+                            found = p
+                            break
+                    except Exception:
+                        continue
+                    if found:
+                        break
+                if found:
+                    # add parent directory so any internal package imports work
+                    parent_dir = str(found.parent)
+                    if parent_dir not in sys.path:
+                        sys.path.insert(0, parent_dir)
+                    spec = util.spec_from_file_location("binance_collector", str(found))
+                    mod = util.module_from_spec(spec)
+                    spec.loader.exec_module(mod)
+                    BinanceDataCollector = getattr(mod, "BinanceDataCollector", None)
+                    if BinanceDataCollector is None:
+                        print("Found file but BinanceDataCollector class not in module:", found)
+                else:
+                    print("Could not locate binance_collector.py under search paths.")
+            except Exception as e2:
+                print("Failed to import binanceDataCollector from file:", e2)
+                BinanceDataCollector = None
 
         if BinanceDataCollector is None:
             #data = None
