@@ -834,38 +834,38 @@ class Trading(Link):
     
     
     def check_breakouts(self, candles: List[Candle], current_idx: int):
-        """
-        Check if current candle breaks a pivot level (BOS/MSB).
-        If yes, create appropriate order block.
-        """
-        if current_idx < self.SWING_LENGTH * 2:
-            return
-        
-        current_candle = candles[current_idx]
-        
-        # Calculate ATR for breakout threshold
-        atr = self.calculate_atr(candles, current_idx)
-        breakout_threshold = atr * self.BREAK_ATR_MULT
-        
-        # Check for bearish breakout (break below pivot low = potential bullish OB)
-        if self.last_pivot_low:
-            pivot_idx, pivot_price, pivot_time = self.last_pivot_low
+            """
+            Check if current candle breaks a pivot level (BOS/MSB).
+            If yes, create appropriate order block.
+            """
+            if current_idx < self.SWING_LENGTH * 2:
+                return
+            
+            current_candle = candles[current_idx]
+            
+            # Calculate ATR for breakout threshold
+            atr = self.calculate_atr(candles, current_idx)
+            breakout_threshold = atr * self.BREAK_ATR_MULT
+            
+            # Check for bearish breakout (break below pivot low = potential bearish OB)
+            if self.last_pivot_low:
+                pivot_idx, pivot_price, pivot_time = self.last_pivot_low
 
-            # Skip if this pivot has already been used to create an OB
-            if pivot_idx not in self._used_pivots:
-                if current_candle.close < (pivot_price - breakout_threshold):
-                    logger.info(f"Bearish breakout detected: broke pivot low at {pivot_price:.2f}")
-                    self.create_bullish_ob(candles, current_idx, pivot_idx)
-        
-        # Check for bullish breakout (break above pivot high = potential bearish OB)
-        if self.last_pivot_high:
-            pivot_idx, pivot_price, pivot_time = self.last_pivot_high
+                # Skip if this pivot has already been used to create an OB
+                if pivot_idx not in self._used_pivots:
+                    if current_candle.close < (pivot_price - breakout_threshold):
+                        logger.info(f"Bearish breakout detected: broke pivot low at {pivot_price:.2f}")
+                        self.create_bearish_ob(candles, current_idx, pivot_idx)
+            
+            # Check for bullish breakout (break above pivot high = potential bullish OB)
+            if self.last_pivot_high:
+                pivot_idx, pivot_price, pivot_time = self.last_pivot_high
 
-            # Skip if this pivot has already been used to create an OB
-            if pivot_idx not in self._used_pivots:
-                if current_candle.close > (pivot_price + breakout_threshold):
-                    logger.info(f"Bullish breakout detected: broke pivot high at {pivot_price:.2f}")
-                    self.create_bearish_ob(candles, current_idx, pivot_idx)
+                # Skip if this pivot has already been used to create an OB
+                if pivot_idx not in self._used_pivots:
+                    if current_candle.close > (pivot_price + breakout_threshold):
+                        logger.info(f"Bullish breakout detected: broke pivot high at {pivot_price:.2f}")
+                        self.create_bullish_ob(candles, current_idx, pivot_idx)
     
     
     def create_bearish_ob(self, candles: List[Candle], breakout_idx: int, pivot_idx: int):

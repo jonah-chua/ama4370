@@ -1874,8 +1874,8 @@ def inspect_signal_context(df: pd.DataFrame, obs: List[OrderBlock], signals: Lis
 
 coin = "ETHUSDT"                  # trading pair
 timeframe = '15m'                  # timeframe for candles
-start = "2025-10-27"                # start date for data collection
-end = "2025-11-11"                  # end date for data collection
+start = "2025-11-30"                # start date for data collection
+end = "2025-12-02"                  # end date for data collection
 
 
 reverse_signals = False              # if True, invert buy/sell signals (for testing)
