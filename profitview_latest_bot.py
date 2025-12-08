@@ -1164,24 +1164,24 @@ class Trading(Link):
             if self.last_pivot_low:
                 pivot_idx, pivot_price, pivot_time = self.last_pivot_low
 
-                # Skip if this pivot has already been used to create an OB
-                if pivot_idx not in self._used_pivots:
+                # FIX: Use pivot_time (stable) instead of pivot_idx (unstable in rolling deque)
+                if pivot_time not in self._used_pivots:
                     if current_candle.close < (pivot_price - breakout_threshold):
                         logger.info(f"Bearish breakout detected: broke pivot low at {pivot_price:.2f}")
-                        self.create_bearish_ob(candles, current_idx, pivot_idx)
+                        self.create_bearish_ob(candles, current_idx, pivot_time)
             
             # Check for bullish breakout (break above pivot high = potential bullish OB)
             if self.last_pivot_high:
                 pivot_idx, pivot_price, pivot_time = self.last_pivot_high
 
-                # Skip if this pivot has already been used to create an OB
-                if pivot_idx not in self._used_pivots:
+                # FIX: Use pivot_time (stable) instead of pivot_idx (unstable in rolling deque)
+                if pivot_time not in self._used_pivots:
                     if current_candle.close > (pivot_price + breakout_threshold):
                         logger.info(f"Bullish breakout detected: broke pivot high at {pivot_price:.2f}")
-                        self.create_bullish_ob(candles, current_idx, pivot_idx)
+                        self.create_bullish_ob(candles, current_idx, pivot_time)
     
     
-    def create_bearish_ob(self, candles: List[Candle], breakout_idx: int, pivot_idx: int):
+    def create_bearish_ob(self, candles: List[Candle], breakout_idx: int, pivot_time: int):
         """
         Create a bearish order block after bullish breakout.
         Per new2_testing: Select highest GREEN/BULLISH candle (close > open) before breakout.
@@ -1247,18 +1247,20 @@ class Trading(Link):
         
         self.order_blocks.append(ob)
         logger.info(f"Created Bearish OB: top={ob.top:.2f} btm={ob.btm:.2f} strength={bearish_str/total_vol:.2%}")
+        
         # Mark pivot as used so we don't create duplicate OBs from the same pivot
+        # FIX: Use pivot_time variable passed in argument
         try:
-            self._used_pivots.add(pivot_idx)
+            self._used_pivots.add(pivot_time)
         except Exception:
-            # Defensive: if pivot_idx isn't available for any reason, continue
+            # Defensive: if pivot_time isn't available for any reason, continue
             pass
         
         # Generate signal (may be skipped if strength ratio too low)
         self.generate_signal("short", candles[breakout_idx], ob)
     
     
-    def create_bullish_ob(self, candles: List[Candle], breakout_idx: int, pivot_idx: int):
+    def create_bullish_ob(self, candles: List[Candle], breakout_idx: int, pivot_time: int):
         """
         Create a bullish order block after bearish breakout.
         Per new2_testing: Select lowest RED/BEARISH candle (close < open) before breakout.
@@ -1324,13 +1326,17 @@ class Trading(Link):
         
         self.order_blocks.append(ob)
         logger.info(f"Created Bullish OB: top={ob.top:.2f} btm={ob.btm:.2f} strength={bullish_str/total_vol:.2%}")
+        
         # Mark pivot as used so we don't create duplicate OBs from the same pivot
+        # FIX: Use pivot_time variable passed in argument
         try:
-            self._used_pivots.add(pivot_idx)
+            self._used_pivots.add(pivot_time)
         except Exception:
             pass
 
         # Generate signal (may be skipped if strength ratio too low)
+        # NOTE: Structural Difference vs Latest_test.py
+        # Test script checks filters at (breakout_idx + 1). Bot checks at (breakout_idx).
         self.generate_signal("long", candles[breakout_idx], ob)
     
     
@@ -1633,7 +1639,7 @@ class Trading(Link):
         closes = [candle_list[i].close for i in range(start, end_idx + 1)]
         
         # Calculate EMA using exponential weighting (span = period)
-        # EMA formula: alpha = 2 / (span + 1), then iteratively weight
+        # EMA formula: alpha =  2 / (span + 1), then iteratively weight
         alpha = 2.0 / (self.ema_period + 1)
         ema = closes[0]  # Start with first value
         
@@ -2287,7 +2293,8 @@ class Trading(Link):
                 "violation_type": self.VIOLATION_TYPE,
                 "min_strength_ratio": self.MIN_STRENGTH_RATIO,
                 "break_atr_mult": self.BREAK_ATR_MULT,
-                "ob_search_window": self.ob_search_window,
+                "ob_min_sl_atr_mult": self.OB_MIN_SL_ATR_MULT,
+                "ob_min_sl_pct": self.OB_MIN_SL_PCT,
                 
                 # Position Management
                 "stop_loss_multiplier": self.STOP_LOSS_MULTIPLIER,
