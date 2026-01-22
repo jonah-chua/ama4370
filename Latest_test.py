@@ -1,28 +1,4 @@
-"""
-Price Action Volumetric Order Blocks -> signal & visualization (matplotlib)
 
-This script implements a close analogue of the Pine Script logic you posted:
-- symmetric pivot detection (ta.pivothigh / ta.pivotlow style)
-- when price breaks a pivot (BOS/MSB), select a candidate candle inside the
-  previous `swing_length` bars to be the order block (highest green or lowest red)
-- compute bullish/bearish strength by summing volume over a window ending at
-  the selected candle (same behavior as the Pine script)
-- create OBs, optionally hide overlaps, track OBs until they are violated,
-  and generate buy/sell signals at the next bar after OB creation when the
-  strength ratio exceeds a threshold
-
-How to use:
-- Adjust parameters in the PARAMETERS section.
-- Provide your OHLCV data as a list-of-dicts (see example below) or load into
-  a pandas DataFrame with columns: ['time'(ms),'open','high','low','close','volume'].
-- Run the script. It will plot a line-chart of close prices, shaded OB rectangles,
-  and buy/sell markers. It also returns `signals` and `obs` from detect_order_blocks().
-
-Dependencies:
-- pandas, numpy, matplotlib
-
-Author: Copied-style implementation from Pine Script logic (converted to Python)
-"""
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
 import pandas as pd
